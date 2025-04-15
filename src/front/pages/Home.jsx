@@ -1,10 +1,12 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 
 export const Home = () => {
 
 	const { store, dispatch } = useGlobalReducer()
+	const[email,setEmail] = useState("")
+	const[password,setPassword] = useState("")
 
 	const loadMessage = async () => {
 		try {
@@ -28,25 +30,33 @@ export const Home = () => {
 
 	}
 
+	const login = ()=>{
+		const option={
+			method: "POST",
+			headers:{
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				"email": email,  //these values in the body "" come from the backend, they must match exactly so that the backend can access the values using the request.json.get
+				"password": password
+			  })
+		}           
+		fetch(import.meta.env.VITE_BACKEND_URL+"api/login", option) //this is the base url from the backend
+		.then((resp)=>{
+			return resp.json()
+		})
+		.then((data)=> console.log(data, "this is my agenda")) 
+		} //this data is the repsonse from the backend which is the token which is defined in the routes.py
+
 	useEffect(() => {
 		loadMessage()
 	}, [])
 
 	return (
-		<div className="text-center mt-5">
-			<h1 className="display-4">Hello Rigo!!</h1>
-			<p className="lead">
-				<img src={rigoImageUrl} className="img-fluid rounded-circle mb-3" alt="Rigo Baby" />
-			</p>
-			<div className="alert alert-info">
-				{store.message ? (
-					<span>{store.message}</span>
-				) : (
-					<span className="text-danger">
-						Loading message from the backend (make sure your python 🐍 backend is running)...
-					</span>
-				)}
-			</div>
+		<div>
+			<input onChange={(e) => setEmail(e.target.value)} value={email} type="text" placeholder="Email" />
+            <input onChange={(e) => setPassword(e.target.value)} value={password}  type="text" placeholder="Password" />
+			<button onClick ={()=>login()}>Login</button>
 		</div>
 	);
 }; 

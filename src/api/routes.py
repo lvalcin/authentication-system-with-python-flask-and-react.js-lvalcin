@@ -15,7 +15,7 @@ CORS(api)
 #creates a token to login
 @api.route('/login', methods=['POST'])
 def handle_login():
-    email_value = request.json.get("email") #allows access to email, this should match the key in the body of the object, this line is needed to create the token
+    email_value = request.json.get("email") #allows access to email from the body, this should match the key in the body of the object, this line is needed to create the token
     password_value = request.json.get("password") #allows access to the password, should match the key in th ebody of the object
     find_user = User.query.filter_by(email=email_value).first() #email refers to the column of the table in models.py 
                     # filtering through an array of objects until there is the first match and then it stops looping through 
