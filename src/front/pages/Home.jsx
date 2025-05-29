@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react"
 import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
 
 	const { store, dispatch } = useGlobalReducer()
 	const[email,setEmail] = useState("")
 	const[password,setPassword] = useState("")
+	const navigate = useNavigate()
 
 	const loadMessage = async () => {
 		try {
@@ -47,9 +49,11 @@ export const Home = () => {
 			return resp.json()
 		})
 		.then((data)=>{ //this data is the repsonse from the backend, it is the token which is defined in the routes.py
-			dispatch({type: "update_token", payload: data.token_value})
-
-		})
+			if (data.token_value){
+            dispatch({type: "update_token", payload: data.token_value})
+            navigate("/private");}
+            else{alert("Signup failed. Please try again.")}
+        })
 	}	
 
 	useEffect(() => {
