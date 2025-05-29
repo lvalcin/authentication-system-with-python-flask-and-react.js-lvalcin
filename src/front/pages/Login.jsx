@@ -31,9 +31,10 @@ const login = ()=>{
             dispatch({type: "update_token", payload: data.token_value})
         })
     }
-    const 
+  
   return (
-    <div className="container text-center mt-5">
+    <div className="container text-center w-50" 
+    style={{backgroundColor:"#663399", width: "300px", height: "300px", borderRadius: "8px",}}>
 			<input onChange={(e) => setEmail(e.target.value)} value={email} type="text" placeholder="Email" className="me-3" />
             <input onChange={(e) => setPassword(e.target.value)} value={password}  type="password" placeholder="Password" className="me-2" />
 			<button onClick ={()=>login()} className="btn btn-secondary rounded-pill border">LOGIN</button>

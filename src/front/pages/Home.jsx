@@ -57,13 +57,14 @@ export const Home = () => {
 	}, [])
 
 	return (
-		<div className="container text-center mt-5">
+		<div className="container text-center mt-5 w-50"
+		style={{backgroundColor:"#663399", width: "300px", height: "300px", borderRadius: "8px",}}>
 			<input onChange={(e) => setEmail(e.target.value)} value={email} type="text" placeholder="Email" className="me-3"/>
             <input onChange={(e) => setPassword(e.target.value)} value={password}  type="password" placeholder="Password" className="me-2" />
 			<button  onClick ={()=>signup()} className="btn btn-secondary rounded-pill border">SIGN UP</button>
-			<p>
+			<p style={{color:"white"}}>
 				Already have an account?
-				<Link to="/login" style={{ color: "blue"}}>
+				<Link to="/login" style={{ color: "#20B2AA"}}>
 					Continue to Login
 				</Link>
 			</p>
