@@ -5,7 +5,7 @@ export const initialStore=()=>{
 }
 
 export default function storeReducer(store, action = {}) {
-  if(action.type="update_token"){ 
+  if(action.type === "update_token"){ 
     // below is how you update the store
     return {
     ...store,

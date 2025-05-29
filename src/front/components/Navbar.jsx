@@ -10,6 +10,7 @@ export const Navbar = () => {
 				<div>
 					{/* //condition? do this: if not do this */}
 					{store.token !== null? "You are logged in": "You are NOT logged in"}
+					
 				</div>
 				<Link to="/">
 					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
