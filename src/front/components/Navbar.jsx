@@ -10,6 +10,11 @@ export const Navbar = () => {
 				<div>
 					{/* //condition? do this: if not do this */}
 					{store.token !== null? "You are logged in": "You are NOT logged in"}
+					<div>
+						<button onClick={()=>dispatch({type: "update_token", payload: null})} className="btn rounded-pill border">
+							LOGOUT
+						</button>
+					</div>
 					
 				</div>
 				<Link to="/">

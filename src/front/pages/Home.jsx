@@ -9,27 +9,27 @@ export const Home = () => {
 	const[email,setEmail] = useState("")
 	const[password,setPassword] = useState("")
 
-	// const loadMessage = async () => {
-	// 	try {
-	// 		const backendUrl = import.meta.env.VITE_BACKEND_URL
+	const loadMessage = async () => {
+		try {
+			const backendUrl = import.meta.env.VITE_BACKEND_URL
 
-	// 		if (!backendUrl) throw new Error("VITE_BACKEND_URL is not defined in .env file")
+			if (!backendUrl) throw new Error("VITE_BACKEND_URL is not defined in .env file")
 
-	// 		const response = await fetch(backendUrl + "/api/hello")
-	// 		const data = await response.json()
+			const response = await fetch(backendUrl + "/api/hello")
+			const data = await response.json()
 
-	// 		if (response.ok) dispatch({ type: "set_hello", payload: data.message })
+			if (response.ok) dispatch({ type: "set_hello", payload: data.message })
 
-	// 		return data
+			return data
 
-	// 	} catch (error) {
-	// 		if (error.message) throw new Error(
-	// 			`Could not fetch the message from the backend.
-	// 			Please check if the backend is running and the backend port is public.`
-	// 		);
-	// 	}
+		} catch (error) {
+			if (error.message) throw new Error(
+				`Could not fetch the message from the backend.
+				Please check if the backend is running and the backend port is public.`
+			);
+		}
 
-	// }
+	}
 	const signup =()=>{
 		const option ={
 			method: "POST",
@@ -46,15 +46,11 @@ export const Home = () => {
 		.then((resp)=>{
 			return resp.json()
 		})
-		.then((data)=>{ console.log(data, "here is my data")
-			// dispatch({type: "update_token", payload: data.token_value})
+		.then((data)=>{ //this data is the repsonse from the backend, it is the token which is defined in the routes.py
+			dispatch({type: "update_token", payload: data.token_value})
 
 		})
-	}
-
-
-	
-//this data is the repsonse from the backend, it is the token which is defined in the routes.py
+	}	
 
 	useEffect(() => {
 		// loadMessage()

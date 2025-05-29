@@ -31,6 +31,7 @@ const login = ()=>{
             dispatch({type: "update_token", payload: data.token_value})
         })
     }
+    const 
   return (
     <div className="container text-center mt-5">
 			<input onChange={(e) => setEmail(e.target.value)} value={email} type="text" placeholder="Email" className="me-3" />
