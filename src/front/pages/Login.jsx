@@ -3,6 +3,8 @@ import PropTypes from "prop-types";  // To define prop types for this component
 import rigoImageUrl from "../assets/img/rigo-baby.jpg"  // Import an image asset
 import useGlobalReducer from "../hooks/useGlobalReducer";  // Import a custom hook for accessing the global state
 import React, { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
+
 
 export const Login = () => {
   // Access the global state using the custom hook.
@@ -10,6 +12,7 @@ export const Login = () => {
 const { store, dispatch } = useGlobalReducer()
 const[email,setEmail] = useState("")
 const[password,setPassword] = useState("")
+const navigate = useNavigate()
 
 const login = ()=>{
         const option={
@@ -28,12 +31,15 @@ const login = ()=>{
             return resp.json()
         })
         .then((data)=> {
+            if (data.token_value){
             dispatch({type: "update_token", payload: data.token_value})
+            navigate("/private");}
+            else{alert("Login failed. Please check your credentials.")}
         })
     }
   
   return (
-    <div className="container text-center w-50" 
+    <div className="container text-center mt-5 w-50" 
     style={{backgroundColor:"#663399", width: "300px", height: "300px", borderRadius: "8px",}}>
 			<input onChange={(e) => setEmail(e.target.value)} value={email} type="text" placeholder="Email" className="me-3" />
             <input onChange={(e) => setPassword(e.target.value)} value={password}  type="password" placeholder="Password" className="me-2" />

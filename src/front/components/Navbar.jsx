@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
+	const navigate = useNavigate()
 	const { store, dispatch } = useGlobalReducer() //this is a hook, goes before the return, after the start of the component name
 
+	const userLogout = () => {
+    dispatch({ type: "update_token", payload: null }); // this clears the token, have the payload back to null
+    navigate("/"); 
+  };
 	return (
 		<nav className="navbar navbar-light bg-light">
 			<div className="container">
@@ -11,7 +17,7 @@ export const Navbar = () => {
 					{/* //condition? do this: if not do this */}
 					{store.token !== null? "You are logged in": "You are NOT logged in"}
 					<div>
-						<button onClick={()=>dispatch({type: "update_token", payload: null})} className="btn rounded-pill border">
+						<button onClick= {userLogout} className="btn rounded-pill border">
 							LOGOUT
 						</button>
 					</div>
